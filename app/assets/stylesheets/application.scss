@@ -29,3 +29,10 @@
   color: #fff;
   text-decoration: none;
 }
+
+.jumbotron {
+
+  background-image: asset-url('cover-img.jpg');
+  background-size: cover;
+  height: 300px;
+}
