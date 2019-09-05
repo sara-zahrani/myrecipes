@@ -36,4 +36,20 @@ class RecipeTest < ActiveSupport::TestCase
     @recipe.description = "a" * 501
     assert_not @recipe.valid?
   end
+
+  test "create new valid recipe" do
+    get new_recipe_path
+  end
+
+  test "reject invalid recipe submissions" do
+    get new_recipe_path
+    assert_template 'recipes/new'
+    assert_no_difference 'Recipe.count' do
+      post recipes_path, params: {recipe: {name: " ", description: " "}}
+    end
+    assert_template 'recipes/new'
+    assert_select 'h2.panel-title'
+    assert_select 'div.panel-body'
+
+  end
 end
